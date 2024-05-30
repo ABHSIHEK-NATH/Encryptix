@@ -1,0 +1,57 @@
+_Titanic Survival Prediction_
+
+Challenge of the Project -> to predict whether a passenger on the titanic would have been survived or not.
+
+*Working of the Analysis*
+1. Question or problem definition
+2. Wrangle, prepare, cleanse the data
+3. Exploratory Data Analysis
+4. Acquire training and testing data
+5. Modeling, predicting and solving the problem
+
+//1. Question or problem definition
+Using the Titanic passenger data (name, age, price of ticket, etc.) to try to predict who will survive and who will die.
+While studying the data found out that is a binary classification.
+
+Where, the values in the second column of the dataset (“Survived”) can be used to determine whether each passenger survived or not:
+
+* if it’s a “1”, the passenger survived.
+* if it’s a “0”, the passenger died.
+
+// 2. Wrangle, prepare, cleanse the data
+Cleaning and handling the missing values. 
+* Age : Contains 177 null values out of 891 entries. Imputed with median values for Age across sets of Pclass and Gender 
+feature combinations.
+
+* Embarked : Contains 2 null values. Imputed with mode of training data.
+
+* Fare: Contains 1 null values. Imputed with mean of training data.
+
+* Cabin : 687 out of 891 Cabin entries are null , i.e. more than 50 % of the total data exists. 
+Deck, is created because it is slightly more general than Cabin.
+
+// 3. Exploratory Data Analysis -> Analyze, identify patterns, and explore the data Analysis
+
+-> Only 350 out of 891 passengers (38.4%) survived in the training set.
+
+* Sex - The number of men on board the ship is much higher than the number of women, 
+but the number of women saved is more than twice that of the number of males survived.
+The survival rates for a women on the ship is around 75% while that for men in around 19%.
+
+* Pclass - Passengers Of Pclass 1 has a very high priority to survive.
+The number of Passengers in Pclass 3 were a lot higher than Pclass 1 and Pclass 2,
+but still the number of survival from Pclass 3 is low compare to them
+Pclass 1 %survived is around 63%, for Pclass2 is around 48%, and Pclass3 survived is around 25%
+Sex and class are important factors for survival. Let’s determine survival rate based on sex and class together.
+
+* Female from Upper class is about 95–96% survived. Only 3 out of 94 Women from Upper class died.
+* Female Upper class has high priority to survive
+* Lower class female has more survived rate than Upper class male.
+
+Created visualization based on Survived/NotSurvived, Sex, Age, PClass, Embakation, Spouse/Sibling. 
+
+// Ultimate Finding : According to the analysis, passengers were more likely to survive if:
+
+* Upper class ticket
+* Women/Lady
+* On the contrary, being a Lower class old man lowered the chances of survival.
