@@ -1,0 +1,40 @@
+*Iris Flower Classification*
+
+-> In this Iris flower dataset there are three species: Setosa, Versicolor and Virginica. These species can be distinguished based on their
+measurements. Now, I have the measurements of Iris flowers categorized by their respective species. My objective is to train a machine 
+learning model that can learn from these measurements and accurately classify the Iris flowers into their respective species.
+
+Features Used:
+1. Sepal length in cm 
+2. Sepal width in cm 
+3. Petal length in cm 
+4. Petal width in cm
+
+-> Data Analysis:
+1. Descriptive statistics- SD, Min, Max etc .
+2. Class Distribution (Species counts are balanced or imbalanced) – Balanced.
+3. Univariate Plots:- Understand each attribute better. 
+
+-> Observation:
+1. Using Sepal_Lenght & Sepal_Width features, we can only distinguish Setosa flower from others.
+2. Seperating Versicolor & Virginica is much harder as they have considerable overlap.
+3. Hence, Sepal_Lenght & Sepal_Width features only work well for Setosa.
+
+-> Machine Learing algorithm:
+
+Steps to implement Machine Learning
+1. Import necessary Library
+2. Analyzing Data 
+3. Spliting the Data Set into train and test
+4. Chossing right algorithm for training model
+5. Test the algorithm with test data.
+
+-> Algorithm used in this analysis:
+1. Logistic Regression
+2. Support Vector Machine
+3. Classification and Regression Tree(CART) 
+4. Gaussion Naive Bayes(NB) 
+5. K-Nearest Neighbour(KNN) 
+6. Deision Tree
+
+The results of these models are described and also compared with eachother. 
