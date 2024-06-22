@@ -1,7 +1,7 @@
 *Sales Prediction Using Python*
 
 Challenge of the project -> Sales prediction involving forecasting the amount of a product that a consumer will purchase, taking
-into account the various factors such as advertising, expenditure, target audience segmentaion and advertising platform selection.
+into account the various factors such as advertising, expenditure, target audience segmentation and advertising platform selection.
 
 So here the problem statement demands to built a model which predicts sales based on the money spent on different platforms 
 for marketing.
@@ -15,7 +15,7 @@ using a simple linear regression model.
 3. Data Inspection
 4. Data Cleaning
 5. Exploratory Data Analysis
-6. Model Building -> Performing Simle Linear Regression 
+6. Model Building -> Performing Simple Linear Regression 
 7. Acquire Testing and Training Data
 8. Model Evaluation and Prediction
 
