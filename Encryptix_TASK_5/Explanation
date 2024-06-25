@@ -1,1 +1,183 @@
+*Credit Card Fraud Detection*
 
+-> Understanding the Problem
+
+Credit Card Fraud Detection is a classic class-imbalance problem where the number of fraud transactions is much lesser than the number of legitimate transaction for 
+any bank. Most of the approaches involve building model on such imbalanced data, and thus fails to produce results on real-time new data because of overfitting on training 
+data and a bias towards the majoritarian class of legitimate transactions. Thus, we can see this as an anomaly detection problem.
+
+so, the main idea of this dataset and model is to understand 
+1. What time does the Credit Card Frauds usually take place?
+2. What are the general trends of amounts for Credit Card Fraud Transactions?
+3. How do we balance the data to not let the model overfit on legitimate transactions?
+
+-> Understanding the Data
+
+1. The Data has 32 features from V1-V28 which are unknown for confidentiality, TIme, Amount and Class
+2. The input features are V1-V28, Time and Amount
+3. The target variable is Class
+4. The Data does not have any missing values as evident from the below mentioned code, thus need not be handled
+5. The Data consists of all numerical features, and only the Target Variable Class is a categorical feature.
+   -> Class 0: Legitimate Transaction
+   -> Class 1: Fraud Transaction
+
+-> Pre Processing or Preparing the Data
+
+1. The Data does not have any missing values and hence, need not be handled.
+2. The Data has only Target Variable Class as the categorical variable.
+3. Remaining Features are numerical and need to be only standardized for comparison after balancing the dataset
+4. The mean of the amount of money in transactions is 88.34
+5. The standard deviation of amount of money in transactions is 250.12
+6. The time is distributed throughout the data equitably and hence, serves as an independent feature
+7. It is best to not remove or drop any data or features in this case and try to tune the model assuming them as independent features initially
+
+-> From the countplot created in this analysis it is found that 
+
+1. The Dataset has 32 columns with unknown features labelled V1 to V28, Time, Amount and Class
+2. The target variable is 'Class' and rest of the variables are input features
+   The Class has the following values:
+   -> 0: Legitimate Transactions
+   -> 1: Fraud Transactions
+3. The Dataset is highly imbalanced as evident from the countplot with majoritarian class label '0' and minority class label '1'
+4. Thus, if we run the model on such imbalanced data we may end up highly overfitting it on the data and resulting in non-deployable model
+5. Hence, we have to perform Synthetic Minority Oversampling on the data to balance it out as shown later after exploring other features.
+
+Finding and Estabilishing Relationship of fraud transactions with amount of money.
+
+-> Here, we hypothesise based on our scatter plot that all fraud transactions occur for an amount less than 2500.
+
+   For which we found out that:
+   1. The fraud transactions are generally not above an amount of 2500.
+   2. The fraud transactions are evenly distributed about time.
+
+But we need to prove these above findings. For which we ran two models finding that how many transactions are
+-> Less than 2500 and 
+-> More than 2500
+
+   It was found that 
+    Transactions less than 2500 are = 449
+    Transactions more than 2500 are = 284358
+
+Also, understanding from this that how many of these transactions are Legitimate and Fraud transactions.
+   
+    It was found that
+      Number of Legitimate Transactions are = 283867
+      Number of Fraud Transactions are = 492
+
+And the Class value count also gives the same data as
+
+0 as in fraud Transactions = 492
+1 as in Legitimate Transactions = 284315
+
+Thus, we can conclude that since the number of fraud transaction below the amount of 2500 is same as the number 
+of total fraud transactions. Hence, all fraud transactions are less than 2500.
+
+Also, Finding and Estabilishing the Relationship between Time and Transactions
+
+->  It is clear that the fraudulent transactions are spread throughout the time period
+
+-> Data Modelling 
+
+1. Study the Feature Correlations of the given data
+2. Plot a Heatmap
+3. Run GridSearch on the Data
+4. Fine Tune the Classifiers
+5. Create Pipelines for evaluation
+
+-> Balancing the Fraud and Legitimate Transactions in the Dataset
+
+   -> Here, we can say that the most correlated features after resolving class imbalance using Synthetic Minority 
+      Oversampling are V14, V10, V4, V12 and V17.
+
+-> Evaluating by using AUC-ROC Score, Classification Report, Accuracy and F1-Score to evaluate the performance of the classifiers
+
+# Evaluation of Classifiers
+
+  - The parameters of each classifier are different
+  - Hence, we do not make use of a single method and this is not to violate DRY Principles
+  - We set pipelines for each classifier unique with parameters
+ 
+    -> SGD Classifier
+    Best Score 0.9560162686072134
+
+                        CLASSIFICATION REPORT
+                   precision    recall  f1-score   support
+
+              0       1.00      1.00      1.00     85295
+              1       0.93      0.68      0.78       148
+
+       accuracy                           1.00     85443
+      macro avg       0.96      0.84      0.89     85443
+   weighted avg       1.00      1.00      1.00     85443
+
+   AUC-ROC - 0.8377909417712454
+   F1-Score - 0.7812500000000001
+   Accuracy - 0.9993445923013002
+
+
+   -> RandomForest Classifier
+   Best Score 0.9997538267139271
+
+                       CLASSIFICATION REPORT
+                  precision    recall  f1-score   support
+
+              0       1.00      1.00      1.00     85295
+              1       0.00      0.00      0.00       148
+
+       accuracy                           1.00     85443
+      macro avg       0.50      0.50      0.50     85443
+   weighted avg       1.00      1.00      1.00     85443
+
+   AUC-ROC - 0.5
+   F1-Score - 0.0
+   Accuracy - 0.9982678510820079
+
+
+   -> Logistic Regression
+   Best Score 0.9348283955183009
+
+                        CLASSIFICATION REPORT
+                  precision    recall  f1-score   support
+
+              0       1.00      1.00      1.00     85295
+              1       1.00      0.05      0.10       148
+
+       accuracy                           1.00     85443
+      macro avg       1.00      0.53      0.55     85443
+   weighted avg       1.00      1.00      1.00     85443
+
+   AUC-ROC - 0.527027027027027
+   F1-Score - 0.10256410256410257
+   Accuracy - 0.9983614807532507
+
+
+   -> KNeighbours Classifier
+   Best Score 0.9025783164998465
+
+                       CLASSIFICATION REPORT
+                  precision    recall  f1-score   support
+
+             0       1.00      1.00      1.00     85295
+             1       0.00      0.00      0.00       148
+
+      accuracy                           1.00     85443
+     macro avg       0.50      0.50      0.50     85443
+  weighted avg       1.00      1.00      1.00     85443
+
+  AUC-ROC - 0.5
+  F1-Score - 0.0
+  Accuracy - 0.9982678510820079
+
+
+
+-> Conclusion Drawn from the Analysis and Model
+
+   1. The K-Nearest Neighbors Classifier tuned with Grid Search with the best parameter being the Euclidean Distance (p=2) outperforms 
+      its counterparts to give a test accuracy of nearly 99.8% and a perfect F1-Score with minimal overfitting
+   2. SMOTE overcomes overfitting by synthetically oversampling minority class labels and is successful to a great degree
+
+-> Summary
+
+   1. All Fraud Transactions occur for an amount below 2500. Thus, the bank can infer clearly that the fraud committers try to commit frauds of smaller amounts to avoid suspicion.
+   2. The fraud transactions are equitable distributed throughout time and there is no clear relationship of time with commiting of fraud.
+   3. The number of fraud transactions are very few comparted to legitimate transactions and it has to be balanced in order for a fair comparison to prevent the model from overfitting.
